@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import Slider from './Slider'
+import Slider from './Slider';
 import Sidebar from './Sidebar';
+import Articles from './Articles';
+
 
 
 class Blog extends Component {
 
-    state = {
+    /* state = {
         articles: {},
         status: null
-    }
+    } */
 
     render() {
 
-        axios.get("http://localhost:3900/api/articles")
+        /* axios.get("http://localhost:3900/api/articles")
             .then(res => {
                 console.log(res.data);
                 this.setState({
                     articles: res.data.articles,
                     status: 'success'
                 });
-            })
+            }) */
 
         return (
 
@@ -33,7 +34,7 @@ class Blog extends Component {
 
                     <div id="content">
                         //Listado de articulos que vendrán del API rest de node
-                        {this.state.status === 'success' &&
+                        {/* {this.state.status === 'success' &&
                             <div>
                                 {this.state.articles.map((article) => {
                                     return(
@@ -41,9 +42,9 @@ class Blog extends Component {
                                     })
                                 }
                             </div>
-                        }
+                        } */}
                         
-                        
+                        <Articles></Articles>
                         
                     </div>
                     <Sidebar 
