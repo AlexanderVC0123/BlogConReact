@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import axios from'axios';
+import Moment from 'react-moment';
+import 'moment/locale/es';
 import Global from './Global';
+import imageDefault from '../assets/images/default.png'
 
 class Articles extends Component{
 
@@ -12,7 +16,50 @@ class Articles extends Component{
     }
 
     componentWillMount(){
-        this.getArticles();
+
+        var home = this.props.home;
+        var search = this.props.search;
+
+        if(home === "true"){
+            this.getLastArticles();
+        }else if(search && search != null && search != undefined){
+            this.getArticlesBySearch(search);
+        }else{
+            this.getArticles();
+        }
+
+    }
+
+    getArticlesBySearch = (searched) => {
+        //console.log("getArticles")
+        axios.get(this.url+"search/"+searched)
+        .then(res => {
+
+            if(res.data.articles){
+                this.setState({
+                articles: res.data.articles,
+                status: 'success'
+                });
+            }  
+        })
+        .catch( err  => {
+            this.setState({
+                articles: [],
+                status: 'success'
+                });
+        });
+    }
+
+    getLastArticles = () => {
+        //console.log("getArticles")
+        axios.get(this.url+"articles/last")
+        .then(res => {
+            this.setState({
+                articles: res.data.articles,
+                status: 'success'
+            });
+            console.log(this.state);
+        })
     }
 
     getArticles = () => {
@@ -32,19 +79,26 @@ class Articles extends Component{
 
             var listadoArticles = this.state.articles.map((article) => {
                 return(
-                    <article className="article-item" id="article-template">
+                    <article key={article._id} className="article-item" id="article-template">
                         <div className="image-wrap">
-                            <img src="https://www.exoticca.com/blog/wp-content/uploads/2019/05/viajes-a-playas-paradis%C3%ADacas-930x360.jpg" alt="Playa" />
+                            {
+                                article.image !== null ? (
+                                    <img src={this.url+'get-image/'+article.image} alt={article.title} />
+                                ) : (
+                                    <img src={imageDefault} alt={article.title}/>
+                                )
+                            }
                         </div>
         
                         <h2>{article.title}</h2>
                         <span className="date">
-                            {article.date} 
+                            <Moment locale='es' fromNow date={article.date}> </Moment>
                         </span>
-                        <a href="#">Leer más</a>
+                        <Link to={'/blog/article/'+article._id}>Leer más</Link>
                         <div className="clearfix"></div>
 
-                    </article>                )
+                    </article>                
+                )
             })
 
             return(
