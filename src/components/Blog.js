@@ -33,7 +33,7 @@ class Blog extends Component {
                 <div className="center">
 
                     <div id="content">
-                        //Listado de articulos que vendrán del API rest de node
+                        {/* //Listado de articulos que vendrán del API rest de node */}
                         {/* {this.state.status === 'success' &&
                             <div>
                                 {this.state.articles.map((article) => {

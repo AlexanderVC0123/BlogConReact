@@ -22,7 +22,7 @@ class Articles extends Component{
 
         if(home === "true"){
             this.getLastArticles();
-        }else if(search && search != null && search != undefined){
+        }else if(search && search !== null && search !== undefined){
             this.getArticlesBySearch(search);
         }else{
             this.getArticles();
@@ -70,7 +70,6 @@ class Articles extends Component{
                 articles: res.data.articles,
                 status: 'success'
             });
-            console.log(this.state);
         })
     }
 
@@ -94,7 +93,7 @@ class Articles extends Component{
                         <span className="date">
                             <Moment locale='es' fromNow date={article.date}> </Moment>
                         </span>
-                        <Link to={'/blog/article/'+article._id}>Leer más</Link>
+                        <Link to={'/blog/articulo/'+article._id}>Leer más</Link>
                         <div className="clearfix"></div>
 
                     </article>                

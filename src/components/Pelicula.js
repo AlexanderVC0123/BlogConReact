@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Pelicula extends Component {
 
@@ -7,7 +8,7 @@ class Pelicula extends Component {
     }
 
     render(){
-        const pelicula = this.props.pelicula;
+        //const pelicula = this.props.pelicula;
         const {titulo, image} = this.props.pelicula;
 
         return (
@@ -20,7 +21,7 @@ class Pelicula extends Component {
                 <span className="date">
                     Hace 5 minutos 
                 </span>
-                <a href="#">Leer más</a>
+                <Link to="/blog">Leer más</Link>
                 <button onClick = {this.marcarFav}>
                     Marcar como favorita
                 </button>

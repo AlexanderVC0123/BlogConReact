@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 import Articles from './Articles';
 
 
-
 class Search extends Component {
 
     render() {
@@ -21,7 +20,7 @@ class Search extends Component {
                 <div className="center">
 
                     <div id="content">
-                        //Listado de articulos que vendrán del API rest de node
+                        {/* //Listado de articulos que vendrán del API rest de node */}
 
                         <Articles 
                             search={searched}
